@@ -1,15 +1,17 @@
 backend:
   name: github
-  repo: tavhidcom/sveltia
-  branch: main
-  # Мы НЕ указываем base_url, так как не используем Vercel/Netlify
-  
-# Остальные настройки коллекций остаются такими же
+  repo: tavhidcom/sveltia # Например: ivan/my-blog
+  branch: main # Название твоей ветки
+
+media_folder: "images" # Папка для загрузки картинок
+public_folder: "/images"
+
 collections:
-  - name: "posts"
-    label: "Посты"
-    folder: "content/posts"
+  - name: "blog"
+    label: "Мои статьи"
+    folder: "content" # ПАПКА, ГДЕ ЛЕЖАТ ТВОИ MD-ФАЙЛЫ
     create: true
+    slug: "{{slug}}"
     fields:
       - { label: "Заголовок", name: "title", widget: "string" }
       - { label: "Текст", name: "body", widget: "markdown" }
