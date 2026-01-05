@@ -12,8 +12,13 @@ public_folder: "/images"
 collections:
   - name: "pages"
     label: "Страницы"
-    folder: "content/pages" # Файлы будут сохраняться в эту папку
+    folder: "content/pages"
     create: true
+    # --- НОВЫЕ ПАРАМЕТРЫ ---
+    nested:
+      depth: 5 # Глубина вложенности папок
+    summary: "{{title}}" # Как отображать страницу в списке
+    # ----------------------
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
@@ -21,13 +26,9 @@ collections:
           label: "Slug", 
           name: "slug", 
           widget: "string", 
-          hint: "URL страницы (например: about-us)" 
+          hint: "Название файла/папки (например: contacts)" 
         }
-      - { 
-          label: "Text", 
-          name: "body", 
-          widget: "markdown" 
-        }
+      - { label: "Text", name: "body", widget: "markdown" }
       - {
           label: "Status",
           name: "status",
