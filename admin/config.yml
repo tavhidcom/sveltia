@@ -1,0 +1,55 @@
+backend:
+  name: github
+  repo: tavhidcom/sveltia
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "blog"
+    label: "Статьи"
+    folder: "content/blog"
+    create: true
+    # Настройка Slug: файл будет называться типа "2023-10-25-my-post.md"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      # 1. Заголовок статьи
+      - { label: "Заголовок", name: "title", widget: "string" }
+
+      # 2. Slug (часть адреса ссылки). Позволяет редактировать URL вручную.
+      - { label: "Ярлык (URL)", name: "slug", widget: "string", hint: "Только латиница и дефисы" }
+
+      # 3. Выбор языка (выпадающий список)
+      - label: "Язык контента"
+        name: "language"
+        widget: "select"
+        options:
+          - { label: "Русский", value: "ru" }
+          - { label: "English", value: "en" }
+        default: "ru"
+
+      # 4. Категории (выпадающий список с возможностью выбрать одну)
+      - label: "Категория"
+        name: "category"
+        widget: "select"
+        options: ["Новости", "Обзоры", "Гайды", "Интервью"]
+
+      # 5. Теги (можно выбрать несколько из предложенных или добавить свой)
+      - label: "Теги"
+        name: "tags"
+        widget: "list"
+        summary: "{{fields.tag}}"
+        field: { label: "Тег", name: "tag", widget: "string" }
+
+      # 6. Дата публикации (с удобным календарем)
+      - { label: "Дата публикации", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY" }
+
+      # 7. Обложка статьи (загрузка картинки)
+      - { label: "Обложка", name: "image", widget: "image", choose_url: true, required: false }
+
+      # 8. Краткое описание (текстовое поле без визуального редактора)
+      - { label: "Краткое описание", name: "description", widget: "text" }
+
+      # 9. Основной контент (Markdown редактор)
+      - { label: "Текст статьи", name: "body", widget: "markdown" }
