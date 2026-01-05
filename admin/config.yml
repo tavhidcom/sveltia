@@ -14,25 +14,36 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
+    
+    # Идентификатор (обязательно slug)
     identifier_field: "slug"
     summary: "{{title}}"
-    
+
+    # Вложенность включена
     nested:
       depth: 5
+      # ВАЖНО: Мы НЕ указываем здесь summary, path и т.д., чтобы не ломать логику
     
-    # --- ДОБАВИТЬ ЭТО ---
-    # Это позволит вручную писать путь, например: "services/design"
-    meta:
-      path:
-        widget: string
-        label: "Путь (структура)"
-        index_file: "index" # Настройка для совместимости
-    # --------------------
-
+    # Имя файла будет просто слаг (например, about.md)
+    # Если файл вложен, CMS сама положит его в папку родителя: parent/child.md
     slug: "{{slug}}"
     
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", pattern: ['^[a-z0-9-]+$', "Только латиница, без слешей"] }
+      
+      # Валидация слага обязательна, чтобы не было ошибок в именах папок
+      - { 
+          label: "Slug", 
+          name: "slug", 
+          widget: "string", 
+          pattern: ['^[a-z0-9\/-]+$', "Латиница, цифры, дефис и слеш"]
+        }
+      
       - { label: "Text", name: "body", widget: "markdown" }
-      - { label: "Status", name: "status", widget: "select", options: ["published", "draft"], default: "published" }
+      - {
+          label: "Status",
+          name: "status",
+          widget: "select",
+          options: ["published", "draft"],
+          default: "published"
+        }
