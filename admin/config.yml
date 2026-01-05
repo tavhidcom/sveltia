@@ -14,31 +14,41 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
-    
-    # Идентификатор (обязательно slug)
     identifier_field: "slug"
     summary: "{{title}}"
-
-    # Вложенность включена
-    nested:
-      depth: 5
-      # ВАЖНО: Мы НЕ указываем здесь summary, path и т.д., чтобы не ломать логику
     
-    # Имя файла будет просто слаг (например, about.md)
-    # Если файл вложен, CMS сама положит его в папку родителя: parent/child.md
-    slug: "{{slug}}"
+    # --- ВАЖНЫЕ ИЗМЕНЕНИЯ ---
+    
+    # 1. Удаляем nested (чтобы не было конфликтов логики)
+    # nested: ... удалено
+    
+    # 2. Настраиваем путь файла: Папка (если есть) + Slug
+    # Если папка не заполнена, файл создастся в корне content/pages/
+    slug: "{{folder}}/{{slug}}"
     
     fields:
       - { label: "Title", name: "title", widget: "string" }
       
-      # Валидация слага обязательна, чтобы не было ошибок в именах папок
+      # 3. Поле для ввода папки (например: "services" или "services/marketing")
+      # required: false — чтобы можно было создавать страницы без папки (в корне)
       - { 
-          label: "Slug", 
-          name: "slug", 
+          label: "Папка (Категория)", 
+          name: "folder", 
           widget: "string", 
-          pattern: ['^[a-z0-9-/]+$', "Латиница, цифры, дефис и слеш"]
+          required: false,
+          pattern: ['^[a-z0-9\/-]+$', "Латиница, цифры и слэш"],
+          hint: "Оставьте пустым для корня, или напишите путь, например: services" 
         }
-      
+
+      # 4. Поле для имени файла (например: "design")
+      - { 
+          label: "Имя файла (Slug)", 
+          name: "slug", 
+          widget: "string",
+          pattern: ['^[a-z0-9-]+$', "Только латиница и дефис (без слэшей)"],
+          hint: "Имя файла без папки, например: design"
+        }
+        
       - { label: "Text", name: "body", widget: "markdown" }
       - {
           label: "Status",
