@@ -3,6 +3,9 @@ backend:
   repo: tavhidcom/sveltia # Например: ivan/my-blog
   branch: main # Название твоей ветки
 
+editor:
+  preview: true
+
 media_folder: "images" # Папка для загрузки картинок
 public_folder: "/images"
 
