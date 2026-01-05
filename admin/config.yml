@@ -1,9 +1,12 @@
 backend:
   name: github
-  repo: tavhidcom/sveltia # Например: ivan/my-blog
-  branch: main # Название твоей ветки
+  repo: tavhidcom/sveltia
+  branch: main
+  # Для локальной разработки удобно добавить (раскомментировать при запуске npx sveltia cms proxy):
+  # local_backend: true 
 
-media_folder: "images" # Папка для загрузки картинок
+# ВАЖНО: Проверьте путь media_folder под ваш движок сайта (Hugo, Astro, и т.д.)
+media_folder: "static/images" 
 public_folder: "/images"
 
 collections:
@@ -11,17 +14,27 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
-    # --- СТРОГО ПО ДОКУМЕНТАЦИИ ДЛЯ ПРАВИЛЬНЫХ ИМЕН ---
-    identifier_field: "slug" # Указывает использовать slug как ID
-    summary: "{{slug}}"      # Отображает в списке именно slug, а не заголовок
-    # --------------------------------------------------
+    
+    # Идентификация
+    identifier_field: "slug" 
+    summary: "{{title}} ({{slug}})" # Удобно видеть и заголовок, и слаг в списке
+    
+    # Вложенность
     nested:
       depth: 5
-    path: "{{path}}/{{slug}}"
-    slug: "{{slug}}" # Это поле отвечает за имя ФАЙЛА на GitHub
+    
+    # Генерация имени файла (берем значение из поля slug)
+    slug: "{{slug}}"
+    
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string" }
+      # Добавил паттерн, чтобы нельзя было создать файл с "плохим" именем
+      - { 
+          label: "Slug (URL)", 
+          name: "slug", 
+          widget: "string", 
+          pattern: ['^[a-z0-9-]+$', "Используйте только строчные латинские буквы, цифры и дефис"] 
+        }
       - { label: "Text", name: "body", widget: "markdown" }
       - {
           label: "Status",
