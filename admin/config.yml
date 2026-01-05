@@ -14,19 +14,21 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
-    # --- НОВЫЕ ПАРАМЕТРЫ ---
+    # 1. Позволяет файлам иметь путь внутри папки (важно для вложенности)
+    path: "{{slug}}/index" 
+    # 2. Включает древовидный вид в интерфейсе
     nested:
-      depth: 5 # Глубина вложенности папок
-    summary: "{{title}}" # Как отображать страницу в списке
-    # ----------------------
+      depth: 5
+    # 3. Slug теперь отвечает за имя папки
     slug: "{{slug}}"
+    
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { 
           label: "Slug", 
           name: "slug", 
           widget: "string", 
-          hint: "Название файла/папки (например: contacts)" 
+          hint: "Например: 'about' или 'about/team'" 
         }
       - { label: "Text", name: "body", widget: "markdown" }
       - {
