@@ -7,28 +7,5 @@
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
-
-  <style>
-    /* 1. Назначаем шрифт всему, что снаружи */
-    html, body {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 2. Магия: меняем шрифт только для текстовых контейнеров, 
-       полностью игнорируя иконки и графику */
-    :is(header, main, section, div, span, button, input, textarea):not(:has(svg)):not(:has(i)) {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 3. Отдельно для редактора контента (самое важное) */
-    .ProseMirror, .tiptap, [contenteditable="true"] {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 4. Принудительный запрет на изменение шрифта для иконок */
-    svg, i, [class*="icon"], .sveltia-icon {
-      font-family: inherit !important;
-    }
-  </style>
 </body>
 </html>
