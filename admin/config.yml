@@ -11,40 +11,22 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
-    # Магия здесь: путь файла будет собираться из родительской папки и слага
-    path: "{{parent}}/{{slug}}"
+    # --- СТРОГО ПО ДОКУМЕНТАЦИИ ДЛЯ ПРАВИЛЬНЫХ ИМЕН ---
+    identifier_field: "slug" # Указывает использовать slug как ID
+    summary: "{{slug}}"      # Отображает в списке именно slug, а не заголовок
+    # --------------------------------------------------
     nested:
       depth: 5
+    path: "{{path}}/{{slug}}"
+    slug: "{{slug}}" # Это поле отвечает за имя ФАЙЛА на GitHub
     fields:
-      - { label: "Заголовок", name: "title", widget: "string" }
-      
-      # Поле выбора папки
-      - label: "Родительская папка"
-        name: "parent"
-        widget: "select"
-        options:
-          - { label: "Корень (Нет папки)", value: "." }
-          - { label: "О нас", value: "about" }
-          - { label: "Услуги", value: "services" }
-          - { label: "Блог", value: "blog" }
-        default: "."
-
-      - { 
-          label: "Slug (Название файла)", 
-          name: "slug", 
-          widget: "string", 
-          hint: "Например: 'mission' (если выбрано 'О нас', путь будет about/mission)" 
-        }
-      - { label: "Текст", name: "body", widget: "markdown" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Text", name: "body", widget: "markdown" }
       - {
           label: "Status",
           name: "status",
           widget: "select",
-          options: [
-            { label: "Published", value: "published" },
-            { label: "Draft", value: "draft" }
-          ],
-          default: "published"
-        }
+          options: ["published", "draft"],
           default: "published"
         }
