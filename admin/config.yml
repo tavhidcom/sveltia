@@ -12,7 +12,7 @@ collections:
     folder: "content/blog"
     create: true
     # Настройка Slug: файл будет называться типа "2023-10-25-my-post.md"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
     fields:
       # 1. Заголовок статьи
       - { label: "Заголовок", name: "title", widget: "string" }
