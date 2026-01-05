@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sveltia CMS Admin</title>
     <style>
-    /* 1. Переопределяем внутренние переменные Sveltia */
-    :root {
-      --sveltia-cms-font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
+  /* 1. Глобальный шрифт для всей страницы */
+  html, body {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+  }
 
-    /* 2. Принудительно назначаем шрифт всем текстовым элементам */
-    /* Мы НЕ используем *, чтобы не сломать иконки */
-    html, body, button, input, select, textarea, span, p, div, h1, h2, h3 {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
+  /* 2. Применяем шрифт ко всем текстовым элементам, КРОМЕ иконок */
+  /* Мы используем отрицание :not(), чтобы не трогать иконочные элементы */
+  :is(div, span, p, h1, h2, h3, button, input, textarea, select, label):not([class*="icon"]):not([class*="Icon"]):not(i) {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+  }
 
-    /* 3. Отдельно для текстового редактора (самое важное) */
-    [contenteditable="true"], .tiptap, .ProseMirror {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
+  /* 3. Явно прописываем шрифт для редактора текста, чтобы буквы были красивыми */
+  .tiptap, .ProseMirror, [contenteditable="true"] {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+  }
 
-    /* 4. Возвращаем иконки (защита от поломки интерфейса) */
-    .icon, [class*="icon"], [class*="Icon"], i {
-      font-family: inherit !important;
-    }
-  </style>
+  /* 4. Защита иконок: возвращаем им системный шрифт для спецсимволов */
+  i, svg, [class*="icon"], [class*="Icon"] {
+    font-family: sans-serif !important; /* Это позволит иконкам отображаться корректно */
+  }
+</style>
 </head>  
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
