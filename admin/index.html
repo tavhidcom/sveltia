@@ -4,29 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sveltia CMS Admin</title>
-    <style>
-    /* 1. Назначаем шрифт всему приложению */
-    html, body, #root {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 2. Применяем шрифт ко всем вложенным элементам */
-    /* Но исключаем всё, что может быть иконкой */
-    *:not(i):not(svg):not(use):not([class*="icon"]):not([class*="Icon"]):not(.material-icons) {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 3. Отдельно защищаем иконки внутри кнопок и меню */
-    i, svg, [class*="icon"] {
-      font-family: inherit !important; /* Возвращает системный шрифт для иконок */
-      speak: none; /* Чтобы программы чтения экрана не читали иконки как текст */
-    }
-
-    /* 4. Исправляем отображение в самом редакторе Markdown */
-    .ProseMirror, .tiptap, [contenteditable="true"] {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-  </style>
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
