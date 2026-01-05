@@ -14,45 +14,46 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
-    
-    # --- ИСПРАВЛЕНИЕ ---
-    # 1. Параметр path отвечает за структуру ПАПОК и ФАЙЛОВ
-    # Если 'dir' не заполнен, CMS автоматически уберет лишний слэш.
+
+    # Формирование пути + автосоздание папки
     path: "{{dir}}/{{slug}}"
-    
-    # 2. Параметр slug теперь просто ID (имя файла без пути)
+
+    # slug используется ТОЛЬКО как имя файла
     slug: "{{slug}}"
-    # -------------------
 
     identifier_field: "slug"
-    summary: "{{title}} ({{dir}}/{{slug}})" 
+    summary: "{{title}} ({{dir}}/{{slug}})"
 
     fields:
-      # Поле для названия папки
-      - { 
-          label: "Папка (Категория)", 
-          name: "dir", 
-          widget: "string", 
-          required: false, # Можно оставить пустым — файл будет в корне
-          pattern: ['^[a-z0-9-]+$', "Только латиница, цифры и дефис (без слэшей)"],
-          hint: "Например: services. Если пусто — файл будет в корне."
-        }
+      # Название папки (категории)
+      - label: "Папка (Категория)"
+        name: "dir"
+        widget: "string"
+        required: false
+        pattern:
+          - "^[a-z0-9-]+$"
+          - "Только латиница, цифры и дефис (без слэшей)"
+        hint: "Например: services. Если пусто — файл будет в корне."
 
-      # Поле для названия файла
-      - { 
-          label: "Имя файла (Slug)", 
-          name: "slug", 
-          widget: "string", 
-          pattern: ['^[a-z0-9-]+$', "Только латиница, цифры и дефис"],
-          hint: "Имя файла. Итоговый путь будет: Папка/ИмяФайла.md"
-        }
+      # Имя файла
+      - label: "Имя файла (Slug)"
+        name: "slug"
+        widget: "string"
+        pattern:
+          - "^[a-z0-9-]+$"
+          - "Только латиница, цифры и дефис"
+        hint: "Имя файла без .md. Итог: content/pages/папка/slug.md"
 
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Текст", name: "body", widget: "markdown" }
-      - {
-          label: "Статус",
-          name: "status",
-          widget: "select",
-          options: ["published", "draft"],
-          default: "published"
-        }
+      - label: "Заголовок"
+        name: "title"
+        widget: "string"
+
+      - label: "Текст"
+        name: "body"
+        widget: "markdown"
+
+      - label: "Статус"
+        name: "status"
+        widget: "select"
+        options: ["published", "draft"]
+        default: "published"
