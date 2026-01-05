@@ -1,6 +1,6 @@
 ---
 title: Тест
-slug: test
+slug: test/services
 status: published
 ---
 testtesttesttesttesttest
