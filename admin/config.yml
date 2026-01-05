@@ -10,11 +10,31 @@ media_folder: "images" # Папка для загрузки картинок
 public_folder: "/images"
 
 collections:
-  - name: "blog"
-    label: "Мои статьи"
-    folder: "content" # ПАПКА, ГДЕ ЛЕЖАТ ТВОИ MD-ФАЙЛЫ
+  - name: "pages"
+    label: "Страницы"
+    folder: "content/pages" # Файлы будут сохраняться в эту папку
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Текст", name: "body", widget: "markdown" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { 
+          label: "Slug", 
+          name: "slug", 
+          widget: "string", 
+          hint: "URL страницы (например: about-us)" 
+        }
+      - { 
+          label: "Text", 
+          name: "body", 
+          widget: "markdown" 
+        }
+      - {
+          label: "Status",
+          name: "status",
+          widget: "select",
+          options: [
+            { label: "Published", value: "published" },
+            { label: "Draft", value: "draft" }
+          ],
+          default: "published"
+        }
