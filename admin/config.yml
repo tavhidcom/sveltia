@@ -11,20 +11,31 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
-    # Включает поддержку древовидной структуры
+    # Магия здесь: путь файла будет собираться из родительской папки и слага
+    path: "{{parent}}/{{slug}}"
     nested:
       depth: 5
-    # Позволяет писать путь в слаге (например, "folder/subfolder")
-    slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Заголовок", name: "title", widget: "string" }
+      
+      # Поле выбора папки
+      - label: "Родительская папка"
+        name: "parent"
+        widget: "select"
+        options:
+          - { label: "Корень (Нет папки)", value: "." }
+          - { label: "О нас", value: "about" }
+          - { label: "Услуги", value: "services" }
+          - { label: "Блог", value: "blog" }
+        default: "."
+
       - { 
-          label: "Slug (Путь)", 
+          label: "Slug (Название файла)", 
           name: "slug", 
           widget: "string", 
-          hint: "Пример: 'about' или 'services/cleaning' (создаст папку services)" 
+          hint: "Например: 'mission' (если выбрано 'О нас', путь будет about/mission)" 
         }
-      - { label: "Text", name: "body", widget: "markdown" }
+      - { label: "Текст", name: "body", widget: "markdown" }
       - {
           label: "Status",
           name: "status",
@@ -33,5 +44,7 @@ collections:
             { label: "Published", value: "published" },
             { label: "Draft", value: "draft" }
           ],
+          default: "published"
+        }
           default: "published"
         }
