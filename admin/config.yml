@@ -14,44 +14,43 @@ collections:
     label: "Страницы"
     folder: "content/pages"
     create: true
+    
+    # --- ИСПРАВЛЕНИЕ ---
+    # 1. Параметр path отвечает за структуру ПАПОК и ФАЙЛОВ
+    # Если 'dir' не заполнен, CMS автоматически уберет лишний слэш.
+    path: "{{dir}}/{{slug}}"
+    
+    # 2. Параметр slug теперь просто ID (имя файла без пути)
+    slug: "{{slug}}"
+    # -------------------
+
     identifier_field: "slug"
-    summary: "{{title}}"
-    
-    # --- ВАЖНЫЕ ИЗМЕНЕНИЯ ---
-    
-    # 1. Удаляем nested (чтобы не было конфликтов логики)
-    # nested: ... удалено
-    
-    # 2. Настраиваем путь файла: Папка (если есть) + Slug
-    # Если папка не заполнена, файл создастся в корне content/pages/
-    slug: "{{folder}}/{{slug}}"
-    
+    summary: "{{title}} ({{dir}}/{{slug}})" 
+
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      
-      # 3. Поле для ввода папки (например: "services" или "services/marketing")
-      # required: false — чтобы можно было создавать страницы без папки (в корне)
+      # Поле для названия папки
       - { 
           label: "Папка (Категория)", 
-          name: "folder", 
+          name: "dir", 
           widget: "string", 
-          required: false,
-          pattern: ['^[a-z0-9\/-]+$', "Латиница, цифры и слэш"],
-          hint: "Оставьте пустым для корня, или напишите путь, например: services" 
+          required: false, # Можно оставить пустым — файл будет в корне
+          pattern: ['^[a-z0-9-]+$', "Только латиница, цифры и дефис (без слэшей)"],
+          hint: "Например: services. Если пусто — файл будет в корне."
         }
 
-      # 4. Поле для имени файла (например: "design")
+      # Поле для названия файла
       - { 
           label: "Имя файла (Slug)", 
           name: "slug", 
-          widget: "string",
-          pattern: ['^[a-z0-9-]+$', "Только латиница и дефис (без слэшей)"],
-          hint: "Имя файла без папки, например: design"
+          widget: "string", 
+          pattern: ['^[a-z0-9-]+$', "Только латиница, цифры и дефис"],
+          hint: "Имя файла. Итоговый путь будет: Папка/ИмяФайла.md"
         }
-        
-      - { label: "Text", name: "body", widget: "markdown" }
+
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Текст", name: "body", widget: "markdown" }
       - {
-          label: "Status",
+          label: "Статус",
           name: "status",
           widget: "select",
           options: ["published", "draft"],
