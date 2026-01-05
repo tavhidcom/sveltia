@@ -1,4 +1,3 @@
-:root {
-  --font-family-primary: 'Roboto', sans-serif;
-  /* You might need to find the specific variable names in the Sveltia source code */
-}
+body {
+        --font-family--default: Lucida Sans Unicode!important;
+      }
