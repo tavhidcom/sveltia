@@ -36,7 +36,7 @@ collections:
           label: "Slug", 
           name: "slug", 
           widget: "string", 
-          pattern: ['^[a-z0-9\/-]+$', "Латиница, цифры, дефис и слеш"]
+          pattern: ['^[a-z0-9-/]+$', "Латиница, цифры, дефис и слеш"]
         }
       
       - { label: "Text", name: "body", widget: "markdown" }
