@@ -4,34 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sveltia CMS Admin</title>
-  <style>
-    /* 1. Задаем базовый шрифт для всей страницы */
-    html, body {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 2. Назначаем шрифт только текстовым элементам интерфейса */
-    /* Мы НЕ используем глобальный селектор *, чтобы не задеть контейнеры иконок */
-    button, input, select, textarea, p, h1, h2, h3, label {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 3. ГЛАВНОЕ: Возвращаем иконкам их родной шрифт */
-    /* Sveltia использует Material Icons или встроенные шрифты. 
-       Это правило говорит: "Если внутри элемента есть иконка, не трогай её шрифт" */
-    .material-icons, 
-    [class*="icon"], 
-    [class*="Icon"], 
-    i, 
-    svg {
-      font-family: inherit !important; 
-    }
-
-    /* 4. Специально для редактора текста */
-    .ProseMirror, [contenteditable="true"] {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-  </style>
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
