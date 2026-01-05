@@ -15,26 +15,30 @@ collections:
     folder: "content/pages"
     create: true
     
-    # Идентификация
-    identifier_field: "slug" 
-    summary: "{{title}} ({{slug}})" # Удобно видеть и заголовок, и слаг в списке
-    
-    # Вложенность
+    # Идентификатор (обязательно slug)
+    identifier_field: "slug"
+    summary: "{{title}}"
+
+    # Вложенность включена
     nested:
       depth: 5
+      # ВАЖНО: Мы НЕ указываем здесь summary, path и т.д., чтобы не ломать логику
     
-    # Генерация имени файла (берем значение из поля slug)
+    # Имя файла будет просто слаг (например, about.md)
+    # Если файл вложен, CMS сама положит его в папку родителя: parent/child.md
     slug: "{{slug}}"
     
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      # Добавил паттерн, чтобы нельзя было создать файл с "плохим" именем
+      
+      # Валидация слага обязательна, чтобы не было ошибок в именах папок
       - { 
-          label: "Slug (URL)", 
+          label: "Slug", 
           name: "slug", 
-          widget: "string", 
-          pattern: ['^[a-z0-9-]+$', "Используйте только строчные латинские буквы, цифры и дефис"] 
+          widget: "string",
+          pattern: ['^[a-z0-9-]+$', "Только латиница, цифры и дефис"]
         }
+      
       - { label: "Text", name: "body", widget: "markdown" }
       - {
           label: "Status",
