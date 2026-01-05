@@ -4,27 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sveltia CMS Admin</title>
-  <style>
-    /* 1. Назначаем шрифт для основных текстовых блоков */
-    html, body, p, div, h1, h2, h3, h4, h5, h6, span, label, input, textarea, select, button {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
-    }
-
-    /* 2. ЗАЩИТА ИКОНОК: запрещаем менять шрифт для элементов, которые Sveltia использует под иконки */
-    /* Обычно это элементы с тегом <i> или специфическими классами */
-    i, 
-    [class*="icon"], 
-    [class*="Icon"], 
-    .material-icons {
-      font-family: inherit !important; /* Позволяет иконкам использовать их родной шрифт */
-    }
-
-    /* 3. Улучшаем внешний вид */
-    body {
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.5;
-    }
-  </style>
 </head>
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
