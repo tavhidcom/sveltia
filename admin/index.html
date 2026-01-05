@@ -4,14 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sveltia CMS Admin</title>
+    <style>
+    /* 1. Переопределяем внутренние переменные Sveltia */
+    :root {
+      --sveltia-cms-font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+    }
 
+    /* 2. Принудительно назначаем шрифт всем текстовым элементам */
+    /* Мы НЕ используем *, чтобы не сломать иконки */
+    html, body, button, input, select, textarea, span, p, div, h1, h2, h3 {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+    }
+
+    /* 3. Отдельно для текстового редактора (самое важное) */
+    [contenteditable="true"], .tiptap, .ProseMirror {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif !important;
+    }
+
+    /* 4. Возвращаем иконки (защита от поломки интерфейса) */
+    .icon, [class*="icon"], [class*="Icon"], i {
+      font-family: inherit !important;
+    }
+  </style>
 </head>  
 <body>
   <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js" type="module"></script>
-      <style>
-      body {
-        --font-family--default: Lucida Sans Unicode;
-      }
-    </style>
 </body>
 </html>
